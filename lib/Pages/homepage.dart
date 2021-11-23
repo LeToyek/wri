@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:wri/Constants/Colors.dart';
 import 'package:wri/ListCard/listcard.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,14 +17,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(children: [
-        Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              SavePass(),
-              TextField(
+      appBar: AppBar(
+        title: Text(
+          'SavePass',
+          style: TextStyle(color: primaryColor, fontSize: 24),
+        ),
+        bottom: PreferredSize(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
                 decoration: InputDecoration(
+                    isDense: true,
                     filled: true,
                     fillColor: Colors.white,
                     hintText: 'Search',
@@ -30,21 +35,41 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(8),
                     )),
               ),
+            ),
+            preferredSize: const Size.fromHeight(72)),
+        elevation: 0,
+        backgroundColor: colorForBackground,
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.more_vert,
+              color: primaryColor,
+              size: 32,
+            ),
+            onPressed: () {},
+          )
+        ],
+      ),
+      body: ListView(children: [
+        Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 16),
+                margin: EdgeInsets.only(bottom: 16),
                 alignment: Alignment.center,
                 child: Column(
                   children: [
                     Text('Secure your data',
                         style: Theme.of(context).textTheme.headline5?.copyWith(
-                              color: Colors.indigo,
+                              color: primaryColor,
                             )),
                     SizedBox(
                       height: 8,
                     ),
                     Text(
                       'tekan tanda + untuk menambahkan',
-                      style: TextStyle(color: Colors.black54, fontSize: 16),
+                      style: TextStyle(color: lightGrey, fontSize: 16),
                     ),
                   ],
                 ),
@@ -54,14 +79,28 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ]),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
+      bottomNavigationBar: BottomNavyBar(
+        backgroundColor: colorForBackground,
+        selectedIndex: _currentIndex,
+        showElevation: false,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-          BottomNavigationBarItem(icon: Icon(Icons.window), label: 'widgets'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'setting'),
+          BottomNavyBarItem(
+              icon: Icon(Icons.home),
+              title: Text('Home'),
+              activeColor: primaryColor,
+              inactiveColor: Colors.grey[500]),
+          BottomNavyBarItem(
+              icon: Icon(Icons.window),
+              title: Text('Window'),
+              activeColor: primaryColor,
+              inactiveColor: Colors.grey[500]),
+          BottomNavyBarItem(
+              icon: Icon(Icons.settings),
+              title: Text('Setting'),
+              activeColor: primaryColor,
+              inactiveColor: Colors.grey[500]),
         ],
-        onTap: (index) {
+        onItemSelected: (index) {
           setState(() {
             _currentIndex = index;
           });
@@ -86,11 +125,11 @@ class SavePass extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .headline5
-                ?.copyWith(color: Colors.indigo, fontWeight: FontWeight.bold),
+                ?.copyWith(color: primaryColor, fontWeight: FontWeight.bold),
           ),
           Icon(
             Icons.more_vert,
-            color: Colors.indigo,
+            color: primaryColor,
             size: 32,
           )
         ],
@@ -130,7 +169,7 @@ class AccountCard extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
-        color: Colors.grey[200],
+        color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Padding(
@@ -146,13 +185,13 @@ class AccountCard extends StatelessWidget {
                   Text(
                     web,
                     style: TextStyle(
-                        color: Colors.black54,
+                        color: strongBlack,
                         fontWeight: FontWeight.bold,
                         fontSize: 16),
                   ),
                   Text(
                     name,
-                    style: TextStyle(color: Colors.black45),
+                    style: TextStyle(color: lightGrey),
                   ),
                 ],
               ),
@@ -161,7 +200,7 @@ class AccountCard extends StatelessWidget {
                 child: Icon(
                   Icons.more_vert,
                   size: 32,
-                  color: Colors.black45,
+                  color: lightGrey,
                 ),
               )
             ],

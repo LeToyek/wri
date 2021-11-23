@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wri/Constants/Colors.dart';
 import 'package:wri/Pages/homepage.dart';
 
 void main() {
@@ -11,7 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.light().copyWith(hintColor: Colors.black26),
+      theme: new ThemeData(
+          scaffoldBackgroundColor: colorForBackground, hintColor: lightGrey),
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
